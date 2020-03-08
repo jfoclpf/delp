@@ -5,7 +5,7 @@ This is a meta and simple portuguese dictionary that uses jsdom to fetch the mea
 Install the package and run the http server
 
 ```
-npm i delp.pt && node server.js
+npm i delp.pt
 ```
 
 It will open a http server which you can access with your browser at `http://localhost:3038`
