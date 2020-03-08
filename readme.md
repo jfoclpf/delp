@@ -2,7 +2,7 @@ This is a meta and simple portuguese dictionary that uses jsdom to fetch the mea
 
 ## How to use the local web page
 
-Install the package and run the http server
+Install the package and run the http server with
 
 ```
 npm i delp.pt
