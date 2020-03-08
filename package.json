@@ -6,6 +6,10 @@
   "scripts": {
     "test": "standard"
   },
+   "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jfoclpf/delp.pt"
+  },
   "author": "jfolpf",
   "license": "GPL-3.0",
   "homepage": "https://delp.pt",
