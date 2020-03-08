@@ -4,8 +4,7 @@
   "description": "Meta Simple Portuguese Dictionary",
   "main": "index.js",
   "scripts": {
-    "test": "standard",
-    "postinstall": "node index.js"
+    "test": "standard"
   },
   "author": "jfolpf",
   "license": "GPL-3.0",
