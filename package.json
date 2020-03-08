@@ -1,0 +1,34 @@
+{
+  "name": "delp.pt",
+  "version": "1.0.9",
+  "description": "Meta Simple Portuguese Dictionary",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard",
+    "postinstall": "node index.js"
+  },
+  "author": "jfolpf",
+  "license": "GPL-3.0",
+  "homepage": "https://delp.pt",
+  "keywords": [
+    "dictionary",
+    "portuguese"
+  ],
+  "dependencies": {
+    "async": "3.1.1",
+    "body-parser": "1.19.0",
+    "colors": "1.4.0",
+    "command-line-args": "5.1.1",
+    "compression": "1.7.4",
+    "debug": "4.1.1",
+    "express": "4.17.1",
+    "express-handlebars": "3.1.0",
+    "jquery": "3.4.1",
+    "jsdom": "16.2.0",
+    "mysql": "2.18.1"
+  },
+  "devDependencies": {
+    "standard": "14.3.1",
+    "words-pt": "1.0.6"
+  }
+}

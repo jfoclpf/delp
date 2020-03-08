@@ -1,0 +1,26 @@
+<div style="font-size:1.5em">
+  <h1>Dicionário em-linha de Português</h1>
+  <div style="font-size:1.1em; width:100%">
+    <p><i>Apenas a Definição da Palavra e nada mais</i></p>
+    <p style="font-size: 1.5em;">Palavra: <input id="palavraInput" style="font-size:1.1em" value="">
+      <button id="buttonVer" style="font-size:1.1em">
+        Ver
+      </button>
+    </p>
+    <p>Para pesquisar a palavra basta aceder a <b>delp.pt/palavra</b></p>
+  </div>
+</div>
+<script>
+  document.getElementById('buttonVer').onclick = function(e){
+    window.location.href = '/' + document.getElementById('palavraInput').value;
+  }
+  document.getElementById('palavraInput').onkeypress = function(e){
+      if (!e) e = window.event;
+      var keyCode = e.keyCode || e.which;
+      if (keyCode == '13'){
+        // Enter pressed
+        window.location.href = '/' + document.getElementById('palavraInput').value
+        return false;
+      }
+    }
+</script>
