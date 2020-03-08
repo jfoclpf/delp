@@ -1,12 +1,12 @@
 {
   "name": "delp.pt",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Meta Simple Portuguese Dictionary",
   "main": "index.js",
   "scripts": {
     "test": "standard"
   },
-   "repository": {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/jfoclpf/delp.pt"
   },
