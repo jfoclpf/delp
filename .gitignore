@@ -1,6 +1,8 @@
 node_modules/
+verbetes*.json*
 dbCredentials.json
 uploadToServer.sh
 js/mining.js
+js/verbetesLight.js
 pm2.json
 public/sitemap*
