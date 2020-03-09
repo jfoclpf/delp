@@ -7,7 +7,7 @@ const bodyParser = require('body-parser')
 const compression = require('compression')
 const colors = require('colors')
 const commandLineArgs = require('command-line-args')
-const debug = require('debug')('app:index')
+const debug = require('debug')('app:server')
 
 // own modules
 const fetchWordFromDicts = require('./js/fetchWord')

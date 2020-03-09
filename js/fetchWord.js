@@ -32,6 +32,8 @@ module.exports = function (word, callback) {
           $content.find('span').css('font-size', '') // removes font-size
           $content.find('script').remove()
 
+          // $content.find('*').removeAttr('id class')
+
           var resultados = $content.html()
           totalSize += resultados.length
           debug(resultados)
@@ -88,6 +90,8 @@ module.exports = function (word, callback) {
                          .dolEntradaVverbeteHeader, .dolVerbeteEntrinfo`).remove()
           // removes links
           $content.find('a').contents().unwrap()
+
+          // $content.find('*').removeAttr('id class')
 
           var resultados = $content.html()
           totalSize += resultados.length
