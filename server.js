@@ -38,7 +38,8 @@ app.use(bodyParser.json()) // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
 
 var optionDefinitions = [
-  { name: 'database', alias: 'd', type: Boolean }
+  { name: 'database', type: Boolean },
+  { name: 'sitemap', type: Boolean }
 ]
 
 // get options from command line arguments
@@ -52,6 +53,11 @@ if (cmdLineArgs.database) {
   })
 } else {
   debug('Started WITHOUT database')
+}
+
+if (cmdLineArgs.sitemap) {
+  const sitemap = require('./js/sitemap')
+  sitemap()
 }
 
 app.get('/:word', function (req, res, next) {

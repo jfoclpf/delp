@@ -3,4 +3,4 @@ dbCredentials.json
 uploadToServer.sh
 js/mining.js
 pm2.json
-
+public/sitemap*
