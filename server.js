@@ -11,7 +11,7 @@ const debug = require('debug')('app:server')
 
 // own modules
 const fetchWordFromDicts = require('./js/fetchWord')
-const db = require('./js/db')
+var db // just require if option is enabled from command line
 
 var app = express()
 app.enable('case sensitive routing')
@@ -47,6 +47,7 @@ var cmdLineArgs = commandLineArgs(optionDefinitions)
 debug('command line arguments', cmdLineArgs)
 
 if (cmdLineArgs.database) {
+  db = require('./js/db')
   debug('Started WITH database')
   db.connect(function () {
     debug('Connection to database with success')

@@ -22,7 +22,7 @@ function generate () {
     WORDS = wordsPt.getArray()
     const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('') // ['a', 'b', 'c', ...]
 
-    renderSitemapIndex (alphabet)
+    renderSitemapIndex(alphabet)
 
     async.each(alphabet, renderSitemapForLetter, function (err) {
       if (err) {
