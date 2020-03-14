@@ -157,13 +157,11 @@ process.on('SIGINT', function () {
       if (err) {
         console.log('Error ending db connection' + err.message)
         process.exitcode = 1 // exit with error
+      } else {
+        process.exitCode = 0
       }
-      server.close()
-      process.exit()
     })
-  } else {
-    console.log('Closing local http server')
-    server.close()
-    process.exit()
   }
+  console.log('Closing local http server')
+  server.close()
 })
