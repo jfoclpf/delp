@@ -5,21 +5,28 @@ const debug = require('debug')('app:db')
 
 var dbInfo = JSON.parse(fs.readFileSync(path.join('dbCredentials.json'), 'utf8')).database
 
-var db = mysql.createConnection(dbInfo)
+var db
 
 module.exports = {
   connect: function (callback) {
-    db.connect(function (err) {
-      if (err) {
-        console.error('Error connecting to database')
-        throw (Error(err))
-      } else {
-        debug(('User ' + dbInfo.user + ' connected successfully to database ' +
-          dbInfo.database + ' at ' + dbInfo.host).green)
-        debug(dbInfo)
-        callback()
-      }
-    })
+    const attemptConnection = () => {
+      debug('Attempting to connect to db')
+      dbInfo.connectTimeout = 1000 // set same as Timeout to avoid overloading the server
+      db = mysql.createConnection(dbInfo)
+      db.connect(function (err) {
+        if (err) {
+          debug('Error connecting to database, try again in 1 sec...')
+          db.destroy() // destroy immediately failed instance of connection
+          setTimeout(attemptConnection, 1000)
+        } else {
+          debug(('User ' + dbInfo.user + ' connected successfully to database ' +
+            dbInfo.database + ' at ' + dbInfo.host).green)
+          debug(dbInfo)
+          callback()
+        }
+      })
+    }
+    attemptConnection()
   },
 
   // check if word is available in our database
