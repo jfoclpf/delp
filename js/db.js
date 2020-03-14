@@ -30,6 +30,7 @@ module.exports = {
 
     db.query(query, function (error, results, fields) {
       if (error) {
+        console.error(`Error checking if word ${word} exists in on our db`)
         console.error(Error(error))
         callback(null)
       } else {
