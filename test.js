@@ -5,8 +5,10 @@ async.series([
   function (callback) {
     delpPt.getWordMeaning('amor', (err, results) => {
       if (err) {
-        console.error(err)
-        process.exit(1)
+        callback(Error(err))
+      }
+      if (results.length === 0) {
+        callback(Error('Empty result'))
       }
       console.log('\n\nAMOR\n\n')
       console.log(results)
@@ -16,8 +18,10 @@ async.series([
   function (callback) {
     delpPt.getWordMeaning('fazer', (err, results) => {
       if (err) {
-        console.error(err)
-        process.exit(1)
+        callback(Error(err))
+      }
+      if (results.length === 0) {
+        callback(Error('Empty result'))
       }
       console.log('\n\nFAZER\n\n')
       console.log(results)
@@ -30,14 +34,13 @@ async.series([
         console.log('\n\nWord adsfadsfa does not exist and it correctly returns ' + err.message)
         callback()
       } else {
-        console.error('ERROR: This war was not supposed to be found')
-        process.exit(1)
+        callback(Error('ERROR: This war was not supposed to be found'))
       }
     })
   }
 ], function (err, results) {
   if (err) {
-    console.log('Error')
+    console.log(err)
     process.exit(1)
   } else {
     console.log('\n\nTest run with success\n')
