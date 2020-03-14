@@ -50,7 +50,7 @@ if (cmdLineArgs.database) {
   db = require('./js/db')
   debug('Started WITH database')
   db.connect(function () {
-    debug('Connection to database with success')
+    console.log('Connection to database with success')
   })
 } else {
   debug('Started WITHOUT database')
