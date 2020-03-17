@@ -10,9 +10,20 @@ module.exports = function () {
   generate()
 }
 
+const MAXIMUM_NBR_URLS = 5000 // Maximum number of urls per sitemap
+
 var WORDS // array with all the words
 
 function generate () {
+  debug('deleting previous sitemap*.xml files')
+  // rm public/sitemap*.xml
+  const dpath = path.join('.', 'public')
+  const regex = /sitemap[\S]*[.]xml$/
+  fs.readdirSync(dpath)
+    .filter(f => regex.test(f))
+    .map(f => fs.unlinkSync(path.join(dpath, f)))
+
+  debug('Generating sitemap')
   wordsPt.init(err => {
     if (err) {
       console.error('Error rendering sitemap:', err.message)
@@ -20,11 +31,19 @@ function generate () {
     }
 
     WORDS = wordsPt.getArray()
-    const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('') // ['a', 'b', 'c', ...]
+    debug('words obtained')
 
-    renderSitemapIndex(alphabet)
+    // each of sitemap cannot contain more than 50000 urls, split into chunks
+    var sitemaps = []
+    for (let i = 0, length = WORDS.length; i < length; i += MAXIMUM_NBR_URLS) {
+      sitemaps.push(WORDS.slice(i, i + MAXIMUM_NBR_URLS))
+    }
+    // sitemaps is now an array of arrays, the latters containing each 50000 words
 
-    async.each(alphabet, renderSitemapForLetter, function (err) {
+    renderSitemapIndex(sitemaps)
+
+    debug(`Generating ${sitemaps.length} sitemaps`)
+    async.eachOf(sitemaps, renderSingleSitemap, function (err) {
       if (err) {
         console.error('Error rendering sitemap.xml:', err.message)
         process.exit(1)
@@ -35,56 +54,54 @@ function generate () {
   })
 }
 
-function renderSitemapForLetter (letter, callback) {
-  // get a subawway of words, just with words starting with letter
-  var words = WORDS.filter(word => word[0] === letter)
+function renderSingleSitemap (words, index, callback) {
+  const formattedIndex = ('00' + (index + 1)).slice(-3) // 0 to '01', 1 to '02'
+  debug(`Generating sitemap${formattedIndex}.xml`)
 
-  var content = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-`
-  var length = words.length
-  for (let i = 0; i < length; i++) {
-    content += `  <url>
-    <loc>https://delp.pt/${words[i]}</loc>
-  </url>
-`
-  }
+  var writeStream = fs.createWriteStream(path.join('public', `sitemap${formattedIndex}.xml`))
 
-  content += `</urlset>
-`
+  writeStream.on('error', (err) => {
+    callback(Error(err))
+  })
 
-  fs.writeFile(path.join('public', `sitemap${letter.toUpperCase()}.xml`), content, function (err) {
-    if (err) {
-      console.error(err)
-      process.exit(1)
-    }
-    debug(`File generated: sitemap${letter.toUpperCase()}.xml`)
+  writeStream.on('finish', () => {
+    debug(`File generated: sitemap${formattedIndex}.xml`)
     callback()
   })
+
+  writeStream.write('<?xml version="1.0" encoding="UTF-8"?>')
+  writeStream.write('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+
+  const length = words.length
+  for (let i = 0; i < length; i++) {
+    writeStream.write(`<url><loc>https://delp.pt/${words[i]}</loc></url>`)
+  }
+
+  writeStream.write('</urlset>')
+  writeStream.end()
 }
 
 // Sitemap Index
 // see https://support.google.com/webmasters/answer/75712?hl=en
-function renderSitemapIndex (alphabet) {
-  var content = `<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-`
+function renderSitemapIndex (sitemaps) {
+  var writeStream = fs.createWriteStream(path.join('public', 'sitemap.xml'))
 
-  for (let i = 0; i < alphabet.length; i++) {
-    content += `  <sitemap>
-    <loc>https://delp.pt/sitemap${alphabet[i].toUpperCase()}.xml</loc>
-  </sitemap>
-`
+  writeStream.on('error', (err) => {
+    console.error(Error(err))
+  })
+
+  writeStream.on('finish', () => {
+    debug('Inedx sitemap generated: sitemap.xml')
+  })
+
+  writeStream.write('<?xml version="1.0" encoding="UTF-8"?>')
+  writeStream.write('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+
+  for (let i = 0; i < sitemaps.length; i++) {
+    const formattedIndex = ('00' + (i + 1)).slice(-3) // 0 to '01', 1 to '02'
+    writeStream.write(`<sitemap><loc>https://delp.pt/sitemap${formattedIndex}.xml</loc></sitemap>`)
   }
 
-  content += `</sitemapindex>
-`
-
-  fs.writeFile(path.join('public', 'sitemap.xml'), content, function (err) {
-    if (err) {
-      console.error(err)
-      process.exit(1)
-    }
-    debug('Main File index generated: sitemap.xml')
-  })
+  writeStream.write('</sitemapindex>')
+  writeStream.end()
 }
