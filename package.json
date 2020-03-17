@@ -30,8 +30,7 @@
     "html2json": "1.0.2",
     "jquery": "3.4.1",
     "jsdom": "16.2.1",
-    "mysql": "2.18.1",
-    "sitemap": "6.1.0"
+    "mysql": "2.18.1"
   },
   "devDependencies": {
     "html-minifier": "4.0.0",
