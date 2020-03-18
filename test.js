@@ -6,10 +6,25 @@ async.series([
     delpPt.getWordMeaning('amor', (err, results) => {
       if (err) {
         callback(Error(err))
+        return
       }
       if (results.length === 0) {
         callback(Error('Empty result'))
+        return
       }
+
+      var foundSentimento = false
+      for (let i = 0; i < results.length; i++) {
+        if (results[i].toLowerCase().includes('sentimento')) {
+          foundSentimento = true
+        }
+      }
+      if (!foundSentimento) {
+        callback(Error('Not found "sentimento" in the definition of Amor'))
+        return
+      }
+      console.log('Found "sentimento" in the definition of Amor')
+
       console.log('\n\nAMOR\n\n')
       console.log(results)
       callback()
@@ -19,9 +34,11 @@ async.series([
     delpPt.getWordMeaning('fazer', (err, results) => {
       if (err) {
         callback(Error(err))
+        return
       }
       if (results.length === 0) {
         callback(Error('Empty result'))
+        return
       }
       console.log('\n\nFAZER\n\n')
       console.log(results)
