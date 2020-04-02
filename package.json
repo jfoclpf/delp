@@ -26,16 +26,16 @@
     "compression": "1.7.4",
     "debug": "4.1.1",
     "express": "4.17.1",
-    "express-handlebars": "4.0.0",
+    "express-handlebars": "4.0.1",
     "html2json": "1.0.2",
     "jquery": "3.4.1",
-    "jsdom": "16.2.1",
+    "jsdom": "16.2.2",
     "mysql": "2.18.1"
   },
   "devDependencies": {
     "html-minifier": "4.0.0",
     "pretty": "2.0.0",
     "standard": "14.3.3",
-    "words-pt": "1.0.14"
+    "words-pt": "1.0.15"
   }
 }
