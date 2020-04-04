@@ -1,6 +1,6 @@
 {
   "name": "delp.pt",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "description": "Meta Simple Portuguese Dictionary",
   "main": "index.js",
   "scripts": {
