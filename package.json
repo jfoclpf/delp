@@ -28,7 +28,7 @@
     "express": "4.17.1",
     "express-handlebars": "4.0.2",
     "html2json": "1.0.2",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "jsdom": "16.2.2",
     "mysql": "2.18.1"
   },
