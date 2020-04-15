@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "standard && node test.js",
-    "postinstall": "node server.js"
+    "postinstall": "node server.js",
+    "updatePackages": "ncu -e 2 || (ncu -u && npm i --ignore-scripts && npm run commitAndUpload)",
+    "commitAndUpload": "npm test && git commit -a -m 'update' && npm version patch && npm publish && git push"
   },
   "repository": {
     "type": "git",
