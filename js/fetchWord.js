@@ -1,3 +1,6 @@
+/* eslint prefer-const: "off" */
+/* eslint no-var: "off" */
+
 const async = require('async')
 const jsdom = require('jsdom')
 const { JSDOM } = jsdom

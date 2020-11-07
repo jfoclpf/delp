@@ -2,6 +2,9 @@ const colors = require('colors')
 const html2json = require('html2json').html2json
 const debug = require('debug')('app:index')
 
+/* eslint prefer-const: "off" */
+/* eslint no-var: "off" */
+
 // own modules
 const fetchWordFromDicts = require('./js/fetchWord')
 

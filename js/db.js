@@ -1,3 +1,6 @@
+/* eslint prefer-const: "off" */
+/* eslint no-var: "off" */
+
 const fs = require('fs')
 const path = require('path')
 const mysql = require('mysql')
@@ -38,7 +41,7 @@ module.exports = {
     db.query(query, function (error, results, fields) {
       if (error) {
         console.error(`Error checking if word ${word} exists in on our db`)
-        console.error(Error(error))
+        console.error(error)
         callback(null)
       } else {
         var isWordInOurDb = results[0][fields[0].name] === 1

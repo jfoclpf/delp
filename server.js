@@ -1,3 +1,6 @@
+/* eslint prefer-const: "off" */
+/* eslint no-var: "off" */
+
 const path = require('path')
 const HTTPportForServer = 3038
 
@@ -38,8 +41,7 @@ app.use(bodyParser.json()) // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
 
 var optionDefinitions = [
-  { name: 'database', type: Boolean },
-  { name: 'sitemap', type: Boolean }
+  { name: 'database', type: Boolean }
 ]
 
 // get options from command line arguments
@@ -54,11 +56,6 @@ if (cmdLineArgs.database) {
   })
 } else {
   debug('Started WITHOUT database')
-}
-
-if (cmdLineArgs.sitemap) {
-  const sitemap = require('./js/sitemap')
-  sitemap()
 }
 
 app.get('/:word', function (req, res, next) {
