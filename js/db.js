@@ -85,7 +85,7 @@ module.exports = {
 
     db.query(query, function (error, results, fields) {
       if (error) {
-        console.log('query:', query)
+        console.error('query:', query)
         console.error(Error(error))
         callback(error)
       } else {
