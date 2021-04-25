@@ -1,6 +1,6 @@
 This is a meta and simple portuguese dictionary that uses jsdom to fetch the meanings of the words from the most renowned dictionaries, and cleans the meaning from visual garbage and visual noise
 
-## How to use the web page
+## Install the server
 
 Clone it, install dependencies and start the http server
 
