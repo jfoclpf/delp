@@ -28,12 +28,12 @@
     "colors": "1.4.0",
     "command-line-args": "5.1.1",
     "compression": "1.7.4",
-    "debug": "4.3.0",
+    "debug": "4.3.2",
     "express": "4.17.1",
     "express-handlebars": "4.0.6",
     "html2json": "1.0.2",
-    "jquery": "3.5.1",
-    "jsdom": "16.3.0",
+    "jquery": "3.6.0",
+    "jsdom": "16.5.0",
     "mysql": "2.18.1"
   },
   "devDependencies": {
