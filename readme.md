@@ -2,10 +2,13 @@ This is a meta and simple portuguese dictionary that uses jsdom to fetch the mea
 
 ## How to use the web page
 
-Install the package and run the http server with
+Clone it, install dependencies and start the http server
 
 ```
-npm i delp.pt
+git clone https://github.com/jfoclpf/delp.pt
+cd delp.pt
+npm install
+npm start
 ```
 
 It will open a http server which you can access with your browser at `http://localhost:3038`
