@@ -18,7 +18,7 @@ It will open a http server which you can access with your browser at `http://loc
 Install the package and ensure no scripts are run
 
 ```
-npm i delp.pt --ignore-scripts
+npm install delp.pt
 ```
 
 Now use the API
