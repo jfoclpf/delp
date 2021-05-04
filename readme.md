@@ -5,8 +5,8 @@ This is a meta and simple portuguese dictionary that uses jsdom to fetch the mea
 Clone it, install dependencies and start the http server
 
 ```
-git clone https://github.com/jfoclpf/delp.pt
-cd delp.pt
+git clone https://github.com/jfoclpf/delp
+cd delp
 npm install
 npm start
 ```
@@ -18,15 +18,15 @@ It will open a http server which you can access with your browser at `http://loc
 Install the package and ensure no scripts are run
 
 ```
-npm install delp.pt
+npm install delp
 ```
 
 Now use the API
 
 ```js
-const delpPt = require('delp.pt')
+const delp = require('delp')
 
-delpPt.getWordMeaning('amor', (err, result) => {
+delp.getWordMeaning('amor', (err, result) => {
   if (err) {
     // handle the error
     return
