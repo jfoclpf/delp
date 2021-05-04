@@ -1,5 +1,5 @@
 {
-  "name": "delp.pt",
+  "name": "delp",
   "version": "1.0.39",
   "description": "Meta Simple Portuguese Dictionary",
   "main": "index.js",
@@ -13,11 +13,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jfoclpf/delp.pt"
+    "url": "git+https://github.com/jfoclpf/delp"
   },
   "author": "jfolpf",
   "license": "GPL-3.0",
-  "homepage": "https://delp.pt",
   "keywords": [
     "dictionary",
     "portuguese"
