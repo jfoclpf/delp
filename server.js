@@ -6,7 +6,6 @@ const HTTPportForServer = 3038
 
 const express = require('express')
 const exphbs = require('express-handlebars')
-const bodyParser = require('body-parser')
 const compression = require('compression')
 const colors = require('colors')
 const commandLineArgs = require('command-line-args')
@@ -37,8 +36,8 @@ app.use('/css', express.static(path.join(__dirname, 'css')))
 app.use('/img', express.static(path.join(__dirname, 'img')))
 
 app.use(compression({ level: 1 })) // level 1 is for fastest compression
-app.use(bodyParser.json()) // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
+app.use(express.json()) // support json encoded bodies
+app.use(express.urlencoded({ extended: true })) // support encoded bodies
 
 var optionDefinitions = [
   { name: 'database', type: Boolean }
