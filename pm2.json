@@ -1,0 +1,13 @@
+{
+  "apps" : [{
+    "name"            : "delp",
+    "script"          : "server.js",
+    "args"            : "--database",
+    "wait_ready"      : true,
+    "listen_timeout"  : 50000,
+    "watch"           : false,
+    "exec_mode"       : "cluster",
+    "instances"       : "max",
+    "log_date_format" : "DD-MM-YYYY"
+  }]
+}
