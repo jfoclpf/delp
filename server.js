@@ -1,9 +1,9 @@
 /* eslint prefer-const: "off" */
 /* eslint no-var: "off" */
 
-const path = require('path')
 const HTTPportForServer = 3038
 
+const path = require('path')
 const express = require('express')
 const exphbs = require('express-handlebars')
 const compression = require('compression')
@@ -40,12 +40,19 @@ app.use(express.json()) // support json encoded bodies
 app.use(express.urlencoded({ extended: true })) // support encoded bodies
 
 var optionDefinitions = [
-  { name: 'database', type: Boolean }
+  { name: 'database', type: Boolean },
+  { name: 'host', type: String }
 ]
 
 // get options from command line arguments
 var cmdLineArgs = commandLineArgs(optionDefinitions)
 debug('command line arguments', cmdLineArgs)
+
+// host is used, when this service is used as webservice
+const host = cmdLineArgs.host
+if (host) {
+  console.log(`host: ${host}`)
+}
 
 if (cmdLineArgs.database) {
   db = require('./js/db')
@@ -57,6 +64,19 @@ if (cmdLineArgs.database) {
   debug('Started WITHOUT database')
 }
 
+app.get('/opensearch.xml', function (req, res) {
+  var data = {
+    layout: false
+  }
+
+  if (host) {
+    data.host = host
+  }
+
+  res.type('application/xml')
+  res.render('opensearch_xml', data)
+})
+
 app.get('/:word', function (req, res, next) {
   debug('\nRoute: app.get(\'/\')')
   debug('word', req.params.word)
@@ -64,6 +84,10 @@ app.get('/:word', function (req, res, next) {
   var data = {}
   data.priberam_content = ''
   data.infopedia_content = ''
+
+  if (host) {
+    data.host = host
+  }
 
   const word = req.params.word.toLowerCase()
   data.word = word
@@ -126,6 +150,9 @@ app.get('/:word', function (req, res, next) {
 // if nothing matches, redirect to root url
 app.get('/', function (req, res) {
   var data = {}
+  if (host) {
+    data.host = host
+  }
   res.render('main', data)
 })
 
