@@ -2,7 +2,7 @@
 
 This is a meta and simple portuguese dictionary that uses jsdom to fetch the meanings of the words from the most renowned dictionaries, and cleans the meaning from visual garbage and visual noise
 
-## Install the server
+## Install as local service
 
 Clone it, install dependencies and start the http server
 
@@ -54,5 +54,14 @@ delp.getWordMeaning('amor', (err, result) => {
     ] */
 
 })
+```
+
+## Install it as webservice
 
 ```
+git clone https://github.com/jfoclpf/delp
+cd delp
+npm install
+node server.js --host <mydomain.pt>
+```
+
