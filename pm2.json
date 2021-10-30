@@ -2,7 +2,7 @@
   "apps" : [{
     "name"            : "delp",
     "script"          : "server.js",
-    "args"            : "--database",
+    "args"            : "--database --host delpt.org",
     "wait_ready"      : true,
     "listen_timeout"  : 50000,
     "watch"           : false,
