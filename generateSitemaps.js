@@ -3,10 +3,20 @@
 /* eslint no-var: "off" */
 
 // just run this script directly with node to generate sitemaps
+// ex: node generateSitemaps.js --host <mydomain.pt>
 
 const fs = require('fs')
 const path = require('path')
 const async = require('async')
+const commandLineArgs = require('command-line-args')
+
+const host = commandLineArgs([{ name: 'host', type: String }]).host
+if (!host) {
+  console.log('Host not defined, define it with option: --host <mydomain.pt>')
+  process.exit(1)
+} else {
+  console.log(`host: ${host}`)
+}
 
 const wordsPt = require('words-pt')
 
@@ -81,7 +91,7 @@ function renderSingleSitemap (words, index, callback) {
 
   const length = words.length
   for (let i = 0; i < length; i++) {
-    writeStream.write(`<url><loc>https://delp.pt/${words[i]}</loc></url>`)
+    writeStream.write(`<url><loc>https://${host}/${words[i]}</loc></url>`)
   }
 
   writeStream.write('</urlset>')
@@ -106,7 +116,7 @@ function renderSitemapIndex (sitemaps) {
 
   for (let i = 0; i < sitemaps.length; i++) {
     const formattedIndex = ('00' + (i + 1)).slice(-3) // 0 to '01', 1 to '02'
-    writeStream.write(`<sitemap><loc>https://delp.pt/sitemap${formattedIndex}.xml</loc></sitemap>`)
+    writeStream.write(`<sitemap><loc>https://${host}/sitemap${formattedIndex}.xml</loc></sitemap>`)
   }
 
   writeStream.write('</sitemapindex>')
