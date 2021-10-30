@@ -134,7 +134,7 @@ app.use(function (req, res) {
   res.redirect('/')
 })
 
-var server = app.listen(HTTPportForServer, function () {
+const server = app.listen(HTTPportForServer, function () {
   console.log('Listening on port ' + HTTPportForServer)
   console.log('To stop server press ' + colors.red.bold('CTRL+C') + '\n')
   console.log('*******************************************************************************')
@@ -143,21 +143,45 @@ var server = app.listen(HTTPportForServer, function () {
     colors.green.bold('http://localhost:' + HTTPportForServer) + '                  **')
   console.log('**                                                                           **')
   console.log('*******************************************************************************')
+
+  if (process.send) {
+    process.send('ready') // very important, trigger to PM2 that app is ready
+  }
 })
 
-// catches CTRL-C
-process.on('SIGINT', function () {
+// gracefully exiting upon CTRL-C or when PM2 stops the process
+process.on('SIGINT', gracefulShutdown)
+process.on('SIGTERM', gracefulShutdown)
+
+function gracefulShutdown (signal) {
+  if (signal) {
+    console.log(`Received signal ${signal}`)
+  }
+  console.log('Gracefully closing http server and db connections')
+
+  process.exitCode = 0 // with success
+
   if (cmdLineArgs.database) {
-    console.log('\nEnding db connection and closing http server')
+    console.log('Ending db connection and closing http server')
     db.end(function (err) {
       if (err) {
-        console.log('Error ending db connection' + err.message)
+        console.log('Error ending db connection:', err.message)
         process.exitcode = 1 // exit with error
-      } else {
-        process.exitCode = 0
       }
     })
   }
-  console.log('Closing local http server')
-  server.close()
-})
+
+  try {
+    server.close(function (err) {
+      if (err) {
+        console.log('Error ending server:', err)
+        process.exitCode = 1
+      } else {
+        console.log('http server closed successfully. Exiting!')
+      }
+    })
+  } catch (err) {
+    console.error('There was an error closing the server')
+    process.exitCode = 1
+  }
+}
