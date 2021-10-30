@@ -56,7 +56,7 @@ delp.getWordMeaning('amor', (err, result) => {
 })
 ```
 
-## Install it as webservice
+## Install as webservice
 
 ```
 git clone https://github.com/jfoclpf/delp
