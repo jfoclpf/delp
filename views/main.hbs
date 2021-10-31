@@ -1,15 +1,11 @@
-<div style="font-size:1.5em">
-  <h1>Dicionário em-linha de Português</h1>
-  <div style="font-size:1.1em; width:100%">
-    <p><i>Apenas a Definição da Palavra e nada mais</i></p>
-    <p style="font-size: 1.5em;">Palavra: <input id="palavraInput" style="font-size:1.1em" value="">
-      <button id="buttonVer" style="font-size:1.1em">
-        Ver
-      </button>
-    </p>
-    <p>Para pesquisar a palavra basta aceder a <b>{{{host}}}/palavra</b></p>
-  </div>
+<div class="no-word-def-page">
+  <p>
+    Palavra: <input id="palavraInput" type="text" size="12"  value="">
+    <button id="buttonVer">Ver</button>
+  </p>
+  <p>Para pesquisar a palavra basta aceder a <b>{{{host}}}/palavra</b></p>
 </div>
+
 <script>
   document.getElementById('buttonVer').onclick = function(e){
     window.location.href = '/' + document.getElementById('palavraInput').value;

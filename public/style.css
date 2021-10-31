@@ -1,0 +1,20 @@
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.no-word-def-page {
+    width:100%;
+}
+
+.no-word-def-page p {
+    font-size: 4em;
+}
+
+.no-word-def-page input {
+    font-size: 1em;
+}
+
+.no-word-def-page button {
+    font-size: 1em;
+}
