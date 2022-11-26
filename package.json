@@ -39,7 +39,7 @@
     "pretty": "2.0.0",
     "snyk": "^1.424.4",
     "standard": "^16.0.4",
-    "words-pt": "1.0.19"
+    "words-pt": "^1.0.21"
   },
   "snyk": true
 }
