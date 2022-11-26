@@ -1,6 +1,5 @@
 [![Node.js CI](https://github.com/jfoclpf/delp/actions/workflows/node.js.yml/badge.svg)](https://github.com/jfoclpf/delp/actions/workflows/node.js.yml)
 [![CodeQL Security Check](https://github.com/jfoclpf/delp/actions/workflows/codeql.yml/badge.svg)](https://github.com/jfoclpf/delp/actions/workflows/codeql.yml)
-[![Coverage Status](https://coveralls.io/repos/github/jfoclpf/delp/badge.svg?branch=master)](https://coveralls.io/github/jfoclpf/delp?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/github/jfoclpf/delp/badge.svg?targetFile=package.json)](https://snyk.io/test/github/jfoclpf/delp?targetFile=package.json)
 [![js-standard-style][js-standard-style_img]][js-standard-style_url]
 <br>
