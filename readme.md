@@ -15,7 +15,7 @@ Clone it, install dependencies and start the http server
 ```
 git clone https://github.com/jfoclpf/delp
 cd delp
-npm install
+npm ci
 npm start
 ```
 
